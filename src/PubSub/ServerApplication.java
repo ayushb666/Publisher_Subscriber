@@ -7,14 +7,14 @@ import java.rmi.Naming;
 public class ServerApplication {
 
 	public static void main(String[] args) throws RemoteException, MalformedURLException{
+		Scanner reader = new Scanner(System.in);
 		try {
 			GroupServer gs = new GroupServerImpl();
 			Server server = new Server(args[0]);
 			Naming.rebind(server.getUserId(), gs);
 			RegistryServer rs = (RegistryServer) Naming.lookup("registry_server");
 			boolean cond = true;
-			Scanner reader = new Scanner(System.in);
-			while(true){
+			while(cond){
 				System.out.println("\nSelect an option: \n1) Register \n2) DeRegister");
 				int s = reader.nextInt();
 				switch (s) {
@@ -30,6 +30,8 @@ public class ServerApplication {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			reader.close();
 		}
 	}
 

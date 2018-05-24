@@ -97,7 +97,7 @@ public class RegistryServerImpl extends UnicastRemoteObject implements RegistryS
 				registeredServers.get(servers.get(serverUserId)).remove(serverUserId);
 				servers.put(serverUserId, servers.get(serverUserId) - 1);
 				Set<String> temp = registeredServers.getOrDefault(servers.get(serverUserId) , new HashSet<String>());
-				temp.remove(serverUserId);
+				temp.add(serverUserId);
 				registeredServers.put(servers.get(serverUserId), temp);
 				return "Network Left";
 			}else{
