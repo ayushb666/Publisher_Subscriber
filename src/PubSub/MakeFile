@@ -1,0 +1,29 @@
+JFLAGS = -g
+JC = javac
+.SUFFIXES: .java .class
+.java.class:
+    $(JC) $(JFLAGS) $*.java
+
+CLASSES = \
+    Article.java \
+    Category.java \
+    Client.java \
+    ClientApplication.java \
+    ClientReceiveData.java \
+    GroupServer.java \
+    GroupServerImpl.java \
+    Ping_Server.java \
+    RegistryServer.java \
+    RegistryServerApplication.java \
+    RegistryServerImpl.java \
+    SendData.java \
+    SendDataToAll.java \
+    Server.java \
+    ServerApplication.java
+
+default: classes
+
+classes: $(CLASSES:.java=.class)
+
+clean: 
+    $(RM) *.class
