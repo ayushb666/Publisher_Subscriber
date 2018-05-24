@@ -1,6 +1,7 @@
 package PubSub;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
+import java.util.Scanner;
 import java.rmi.Naming;
 
 public class ServerApplication {
@@ -11,7 +12,22 @@ public class ServerApplication {
 			Server server = new Server(args[0]);
 			Naming.rebind(server.getUserId(), gs);
 			RegistryServer rs = (RegistryServer) Naming.lookup("registry_server");
-			System.out.println(rs.registerServer(server.getUserId()));
+			boolean cond = true;
+			Scanner reader = new Scanner(System.in);
+			while(true){
+				System.out.println("\nSelect an option: \n1) Register \n2) DeRegister");
+				int s = reader.nextInt();
+				switch (s) {
+				case 1:
+					System.out.println(rs.registerServer(server.getUserId()));
+					break;
+				case 2:
+					System.out.println(rs.deRegisterServer(server.getUserId()));
+					break;
+				default:
+					break;
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
